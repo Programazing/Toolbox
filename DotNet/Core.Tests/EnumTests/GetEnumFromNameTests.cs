@@ -13,8 +13,16 @@ namespace Core.Tests.EnumTests
         public void GetEnumFromName_WillReturnAnEnum_WhenGiven_AnExistingKey()
         {
             var sut = Enums.GetEnumFromName<Colors>("Blue");
-
+            
             sut.Should().Be(Colors.Blue);
+        }
+
+        [Test]
+        public void GetEnumFromName_WillThrowArgumentException_WhenGiven_AnNonExistingKey()
+        {
+            Action sut = () => Enums.GetEnumFromName<Colors>("car");
+
+            sut.Should().Throw<ArgumentException>();
         }
 
         private enum Colors
